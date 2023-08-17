@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trafikklys</title>
+
+<style>
+
+body {
+background: rgb(181,14,5);
+background: linear-gradient(90deg, rgba(181,14,5,0.9976365546218487) 25%, rgba(245,229,0,1) 52%, rgba(15,194,8,1) 78%);
+justify-content: center;
+margin: 50px;
+}
+
+#Trafikklys {
+background: rgb(40,36,36);
+background: linear-gradient(90deg, rgba(40,36,36,0.9976365546218487) 17%, rgba(0,0,0,0.9976365546218487) 50%, rgba(42,37,37,1) 88%);
+border: solid black;
+align-items: center;
+height: 500px;
+width: 200px;
+align-items: center;
+border-radius: 20px;
+margin-left: 630px;
+margin-bottom: 20px;
+}
+
+.colorcirckle {
+width: 110px;
+height: 110px;
+background-color: lightgrey;
+border: groove black;
+margin: 43px;
+margin-top: 15%;
+border-radius: 50%;
+}
+
+.red {
+background-color: red;
+}
+
+.yellow {
+background-color: yellow;
+}
+
+.green {
+background-color: green;
+}
+
+button {
+width: 150px;
+height: 50px;
+font-size: 15px;
+}
+
+</style>
+</head>
+
+<body>
+    
+<div id="Trafikklys">
+<div id="red" class="colorcirckle"></div>
+<div id="yellow" class="colorcirckle"></div>
+<div id="green" class="colorcirckle"></div>
+</div>
+
+<div style="text-align: center;">
+<button onclick="changeColor('red');">Trykk for rød</button>    
+<button onclick="changeColor('redYellow');">Rød og gul</button>
+<button onclick="changeColor('yellow');">Trykk for gul</button>
+<button onclick="changeColor('green');">Trykk for grønn</button>
+
+</div>
+
+<script>
+let redCircle = document.getElementById('red');        //henter ID fra red i onclik, osv. I onclick er parameterne som er sendt ned i funks.
+let yellowCircle = document.getElementById('yellow');   // "color"
+let greenCircle = document.getElementById('green');
+let redYelCircle = document.getElementById('redYellow');
+
+function changeColor(color) {   //Color kommuniserer med fargene i button onclick
+if(color==='red') {
+redCircle.classList.add('red');  //nå kan man bare skrive variabelnavnet
+yellowCircle.classList.remove('yellow');
+greenCircle.classList.remove('green');
+}
+else if(color==='redYellow'){
+yellowCircle.classList.add('yellow');
+redCircle.classList.add('red');
+greenCircle.classList.remove('green');
+}
+else if(color==='yellow'){
+yellowCircle.classList.add('yellow');
+redCircle.classList.remove('red');
+greenCircle.classList.remove('green');
+}
+else if(color==='green'){
+greenCircle.classList.add('green');
+redCircle.classList.remove('red');
+yellowCircle.classList.remove('yellow');
+}
+}
+
+function startCycle() {
+    changeColor('red'); //Setter trafikklyset til rødt fra start
+    setTimeout(() => changeColor('redYellow'), 3000);  //hele "skallet" for setTimeOut, og kaller på 
+    setTimeout(() => changeColor('green'), 5000);      // changeColor-funksjonen. 3000ms = 3 sekunder. 
+    setTimeout(() => changeColor('yellow'), 7000);    //Vi må øke tallet slik at ikke fargene overlapper hverandre.
+    setTimeout(startCycle, 9000); //Dette starter den på nytt igjen etter 7 sekunder, når alle farger er ferdige med å kjøre. 
+}
+
+startCycle();
+
+
+
+
+</script>
+</body>
+
+
+</html>
